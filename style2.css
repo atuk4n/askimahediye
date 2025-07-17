@@ -1,0 +1,77 @@
+
+body::before {
+  content: "";
+  background: url('arkaplan.jpg') no-repeat center center fixed;
+  background-size: cover;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -2;
+ 
+}
+.hidden {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1.5s ease-in-out;
+}
+
+.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+.hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #f9c6ff;
+  padding: 20px;
+  backdrop-filter: brightness(0.6);
+}
+
+.hero h1 {
+  font-size: 3em;
+  margin: 0;
+  text-shadow: 0 0 15px #ff8df6;
+}
+
+.hero p {
+  font-size: 1.2em;
+  margin-top: 10px;
+}
+
+.section {
+  min-height: 100vh;
+  padding: 60px 20px;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1.2s ease;
+  text-align: center;
+}
+
+.section.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section h2 {
+  font-size: 2em;
+  color: #ffc0f0;
+  margin-bottom: 15px;
+}
+
+.section p {
+  font-size: 1.1em;
+  max-width: 600px;
+  margin: auto;
+  color: #ffd8f8;
+}
+.section p span {
+  font-weight: bold;
+  color: #ffb3d1;
+}

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>star shopping ✧</title>
+
+  <!-- Harici CSS dosyasını bağla -->
+  
+  <link rel="stylesheet" href="style2.css">
+  <!-- Google fontu içe aktar (mutlaka <style> bloğu düzgün kapatılmalı) -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap');
+  </style>
+</head>
+
+<body>
+ 
+
+  <!-- Üst başlık bölümü -->
+    <div class="hero">
+    <h1>❀ star shopping ❀</h1>
+    <p>for someone special...</p>
+  </div>
+
+  <!-- Bölüm bölüm ortaya çıkan mesajlar -->
+  <div class="section hidden">
+    <h2>“Wait right here...”</h2>
+    <p>Birlikte olduğumuz o ilk an hâlâ aklımda.</p>
+  </div>
+
+  <div class="section hidden">
+    <h2>“I'll be back in the mornin’”</h2>
+    <p>Her sabah gözlerini görmek için geri döneceğim.</p>
+  </div>
+
+  <div class="section hidden">
+    <h2>“I know that I'm not that important to you...”</h2>
+    <p>Ama sen benim için bir evrenden fazlasısın.</p>
+  </div>
+
+  <div class="section hidden">
+    <h2>“But I'm still here...”</h2>
+    <p>Yıldızlar kadar uzak olsan bile, kalbime yakınsın.</p>
+  </div>
+
+  <div class="section hidden">
+    <h2>🌠 Seni seviyorum...</h2>
+    <p>Bu site sadece senin için yazıldı. Lil Peep melodisinde, gökyüzüyle birlikte.</p>
+  </div>
+  
+
+</div>
+<div class="section hidden">
+  <h2>💖 Zaman bizimle akıyor...</h2>
+  <p>
+    Tanıştığımızdan beri <span id="edays">--</span> gün, <span id="ehours">--</span> saat, 
+    <span id="eminutes">--</span> dakika, <span id="eseconds">--</span> saniye geçti.
+  </p>
+</div>
+
+
+  <!-- Arka planda otomatik müzik -->
+  <audio autoplay loop hidden>
+    <source src="muzik.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Yazılar kaydıkça belirsin -->
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    });
+
+    document.querySelectorAll('.hidden').forEach(el => observer.observe(el));
+ 
+   function updateElapsedTime() {
+  const startDate = new Date("2025-06-28T16:23:00").getTime(); // Tanışma tarihi
+  const now = new Date().getTime();
+  const distance = now - startDate;
+
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  document.getElementById("edays").innerText = days;
+  document.getElementById("ehours").innerText = hours;
+  document.getElementById("eminutes").innerText = minutes;
+  document.getElementById("eseconds").innerText = seconds;
+}
+
+setInterval(updateElapsedTime, 1000);
+updateElapsedTime();
+
+
+ 
+  </script>
+</body>
+</html>
