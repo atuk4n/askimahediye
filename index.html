@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>star shopping ✧</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 
   <!-- Harici CSS dosyasını bağla -->
   
@@ -17,6 +19,12 @@
  
 
   <!-- Üst başlık bölümü -->
+  
+  <div class="music-control">
+  <button onclick="document.getElementById('music').play()">🎵 Müziği Başlat</button>
+</div>
+ 
+  
     <div class="hero">
     <h1>❀ star shopping ❀</h1>
     <p>for someone special...</p>
@@ -59,10 +67,12 @@
 </div>
 
 
-  <!-- Arka planda otomatik müzik -->
-  <audio autoplay loop hidden>
-    <source src="muzik.mp3" type="audio/mpeg">
-  </audio>
+  
+
+<audio id="music" loop>
+  <source src="muzik.mp3" type="audio/mpeg">
+</audio>
+
 
   <!-- Yazılar kaydıkça belirsin -->
   <script>
