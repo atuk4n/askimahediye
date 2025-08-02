@@ -2,111 +2,616 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <title>star shopping ✧</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-  <!-- Harici CSS dosyasını bağla -->
-  
-  <link rel="stylesheet" href="style2.css">
-  <!-- Google fontu içe aktar (mutlaka <style> bloğu düzgün kapatılmalı) -->
+  <title>star shopping ✧</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap');
+    /* Temel Stil Ayarları */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Comfortaa', cursive;
+    }
+    
+    body {
+      background: linear-gradient(135deg, #0b0617, #1a0a2e, #2d0a46);
+      color: #f5e9ff;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      line-height: 1.6;
+    }
+    
+    /* Gece Gökyüzü ve Yıldız Efektleri */
+    .night-sky {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+      z-index: -2;
+    }
+    
+    .stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    .star {
+      position: absolute;
+      background-color: #fff;
+      border-radius: 50%;
+      animation: twinkle var(--duration) infinite ease-in-out;
+      opacity: 0;
+    }
+    
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 1; }
+    }
+    
+    /* Müzik Kontrolü */
+    .music-control {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 100;
+    }
+    
+    .music-control button {
+      background: rgba(157, 78, 221, 0.25);
+      border: 1px solid #9d4edd;
+      color: #e0aaff;
+      padding: 10px 15px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 0 15px rgba(157, 78, 221, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .music-control button:hover {
+      background: rgba(157, 78, 221, 0.4);
+      transform: scale(1.05);
+    }
+    
+    /* Hero Bölümü */
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, rgba(157, 78, 221, 0.1) 0%, transparent 70%);
+      z-index: -1;
+    }
+    
+    .hero h1 {
+      font-size: 4.5rem;
+      margin-bottom: 20px;
+      background: linear-gradient(to right, #e0aaff, #c77dff, #9d4edd);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 30px rgba(157, 78, 221, 0.7);
+      letter-spacing: 3px;
+      font-weight: 700;
+    }
+    
+    .hero p {
+      font-size: 1.5rem;
+      max-width: 600px;
+      opacity: 0.9;
+      margin-top: 10px;
+      color: #d8b4fe;
+    }
+    
+    .subtitle {
+      font-size: 1.2rem;
+      margin-top: 10px;
+      color: #c77dff;
+      max-width: 500px;
+    }
+    
+    /* Mesaj Bölümleri */
+    .message-section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 80px 20px;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 1s ease;
+      position: relative;
+      margin: 50px 0;
+    }
+    
+    .message-section.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .message-card {
+      background: rgba(30, 15, 60, 0.4);
+      border: 1px solid rgba(170, 110, 255, 0.2);
+      border-radius: 20px;
+      padding: 50px 40px;
+      max-width: 800px;
+      width: 90%;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 
+                  0 0 30px rgba(157, 78, 221, 0.2) inset;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .message-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(199, 125, 255, 0.1) 0%, transparent 70%);
+      z-index: -1;
+    }
+    
+    .message-section h2 {
+      font-size: 2.8rem;
+      margin-bottom: 30px;
+      color: #e0aaff;
+      text-shadow: 0 0 15px rgba(224, 170, 255, 0.8);
+      font-weight: 600;
+    }
+    
+    .message-section p {
+      font-size: 1.3rem;
+      max-width: 700px;
+      line-height: 1.8;
+      color: #e9d5ff;
+    }
+    
+    .quote {
+      font-style: italic;
+      margin: 25px 0;
+      padding: 15px 30px;
+      border-left: 3px solid #c77dff;
+      background: rgba(157, 78, 221, 0.1);
+      border-radius: 0 10px 10px 0;
+    }
+    
+    /* Zaman Sayacı */
+    .time-section {
+      background: rgba(15, 8, 35, 0.6);
+      border-top: 1px solid rgba(199, 125, 255, 0.3);
+      border-bottom: 1px solid rgba(199, 125, 255, 0.3);
+      padding: 80px 20px;
+      text-align: center;
+    }
+    
+    .time-container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    .time-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 50px;
+      color: #d8b4fe;
+      text-shadow: 0 0 10px rgba(216, 180, 254, 0.6);
+    }
+    
+    .time-counter {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+    
+    .time-unit {
+      background: rgba(45, 20, 80, 0.3);
+      border: 1px solid rgba(170, 110, 255, 0.3);
+      padding: 20px 15px;
+      border-radius: 15px;
+      min-width: 120px;
+      backdrop-filter: blur(5px);
+      transition: transform 0.3s ease;
+    }
+    
+    .time-unit:hover {
+      transform: translateY(-10px);
+      background: rgba(157, 78, 221, 0.2);
+    }
+    
+    .time-value {
+      font-size: 3rem;
+      font-weight: bold;
+      color: #c77dff;
+      text-shadow: 0 0 15px rgba(199, 125, 255, 0.8);
+    }
+    
+    .time-label {
+      font-size: 1rem;
+      opacity: 0.8;
+      margin-top: 10px;
+      color: #e0aaff;
+    }
+    
+    /* Özel Buton */
+    .special-button {
+      margin-top: 50px;
+      background: linear-gradient(to right, #9d4edd, #7b2cbf);
+      border: none;
+      color: white;
+      padding: 18px 50px;
+      font-size: 1.3rem;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 5px 20px rgba(157, 78, 221, 0.5);
+      letter-spacing: 1px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .special-button:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 10px 30px rgba(157, 78, 221, 0.7);
+      background: linear-gradient(to right, #8a42c7, #6a25a9);
+    }
+    
+    .special-button::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -100%;
+      width: 50px;
+      height: 200%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transform: rotate(25deg);
+      transition: all 0.6s;
+    }
+    
+    .special-button:hover::after {
+      left: 120%;
+    }
+    
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 1rem;
+      opacity: 0.7;
+      color: #c77dff;
+      background: rgba(15, 8, 35, 0.5);
+      border-top: 1px solid rgba(170, 110, 255, 0.2);
+    }
+    
+    .heart {
+      color: #ff6b6b;
+      animation: heartbeat 1.2s infinite;
+      display: inline-block;
+    }
+    
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+    
+    /* Responsive Tasarım */
+    @media (max-width: 900px) {
+      .hero h1 {
+        font-size: 3.5rem;
+      }
+      
+      .message-section h2 {
+        font-size: 2.3rem;
+      }
+      
+      .message-section p {
+        font-size: 1.1rem;
+      }
+      
+      .time-unit {
+        min-width: 100px;
+      }
+      
+      .time-value {
+        font-size: 2.5rem;
+      }
+    }
+    
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .hero p {
+        font-size: 1.2rem;
+      }
+      
+      .message-section {
+        padding: 60px 20px;
+      }
+      
+      .message-card {
+        padding: 30px 20px;
+      }
+      
+      .message-section h2 {
+        font-size: 1.8rem;
+      }
+      
+      .time-section h2 {
+        font-size: 2rem;
+      }
+      
+      .time-unit {
+        min-width: 80px;
+        padding: 15px 10px;
+      }
+      
+      .time-value {
+        font-size: 2rem;
+      }
+      
+      .special-button {
+        padding: 15px 35px;
+        font-size: 1.1rem;
+      }
+    }
+    
+    @media (max-width: 400px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+      
+      .time-counter {
+        gap: 10px;
+      }
+      
+      .time-unit {
+        min-width: 70px;
+        padding: 12px 8px;
+      }
+      
+      .time-value {
+        font-size: 1.8rem;
+      }
+    }
   </style>
 </head>
-
 <body>
- 
-
-  <!-- Üst başlık bölümü -->
+  <!-- Gece Gökyüzü -->
+  <div class="night-sky"></div>
   
+  <!-- Yıldız Efektleri -->
+  <div class="stars" id="stars"></div>
+  
+  <!-- Müzik Kontrolü -->
   <div class="music-control">
-  <button onclick="document.getElementById('music').play()">🎵 Müziği Başlat</button>
-</div>
- 
-  
-    <div class="hero">
-    <h1>❀ star shopping ❀</h1>
-    <p>for someone special...</p>
-  </div>
-
-  <!-- Bölüm bölüm ortaya çıkan mesajlar -->
-  <div class="section hidden">
-    <h2>“Wait right here...”</h2>
-    <p>Birlikte olduğumuz o ilk an hâlâ aklımda.</p>
-  </div>
-
-  <div class="section hidden">
-    <h2>“I'll be back in the mornin’”</h2>
-    <p>Her sabah gözlerini görmek için geri döneceğim.</p>
-  </div>
-
-  <div class="section hidden">
-    <h2>“I know that I'm not that important to you...”</h2>
-    <p>Ama sen benim için bir evrenden fazlasısın.</p>
-  </div>
-
-  <div class="section hidden">
-    <h2>“But I'm still here...”</h2>
-    <p>Yıldızlar kadar uzak olsan bile, kalbime yakınsın.</p>
-  </div>
-
-  <div class="section hidden">
-    <h2>🌠 Seni seviyorum...</h2>
-    <p>Bu site sadece senin için yazıldı. Lil Peep melodisinde, gökyüzüyle birlikte.</p>
+    <button onclick="toggleMusic()">
+      <i class="fas fa-music"></i> Müziği Başlat
+    </button>
   </div>
   
-
-</div>
-<div class="section hidden">
-  <h2>💖 Zaman bizimle akıyor...</h2>
-  <p>
-    Tanıştığımızdan beri <span id="edays">--</span> gün, <span id="ehours">--</span> saat, 
-    <span id="eminutes">--</span> dakika, <span id="eseconds">--</span> saniye geçti.
-  </p>
-</div>
-
-
+  <!-- Hero Bölümü -->
+  <div class="hero">
+    <h1>✧ star shopping ✧</h1>
+    <p>for someone special in the universe...</p>
+    <div class="subtitle">"I'll be back in the morning, I know that I'm not that important to you..."</div>
+  </div>
   
-
-<audio id="music" loop>
-  <source src="muzik.mp3" type="audio/mpeg">
-</audio>
-
-
-  <!-- Yazılar kaydıkça belirsin -->
+  <!-- Mesaj Bölümleri -->
+  <div class="message-section hidden">
+    <div class="message-card">
+      <h2>“Wait right here...”</h2>
+      <p>Birlikte olduğumuz o ilk an hâlâ aklımda. Seni ilk gördüğümde zaman durdu ve yıldızlar parlamaya başladı.</p>
+      <div class="quote">"I just wanna be with you, be with you"</div>
+    </div>
+  </div>
+  
+  <div class="message-section hidden">
+    <div class="message-card">
+      <h2>“I'll be back in the mornin’”</h2>
+      <p>Her sabah gözlerini görmek için geri döneceğim. Seninle geçirdiğim her an, hayatımın en değerli hazinesi.</p>
+      <div class="quote">"Look at the sky tonight, all of the stars have a reason"</div>
+    </div>
+  </div>
+  
+  <div class="message-section hidden">
+    <div class="message-card">
+      <h2>“I know that I'm not that important to you...”</h2>
+      <p>Ama sen benim için bir evrenden fazlasısın. Kalbimdeki her yıldız senin adını fısıldıyor.</p>
+      <div class="quote">"You're the reason I'm alive, you're the reason I'm breathing"</div>
+    </div>
+  </div>
+  
+  <div class="message-section hidden">
+    <div class="message-card">
+      <h2>“But I'm still here...”</h2>
+      <p>Yıldızlar kadar uzak olsan bile, kalbime yakınsın. Senin için buradayım ve hep burada olacağım.</p>
+      <div class="quote">"I'll be right here waiting for you, my love"</div>
+    </div>
+  </div>
+  
+  <div class="message-section hidden">
+    <div class="message-card">
+      <h2>🌠 Seni Seviyorum...</h2>
+      <p>Bu site sadece senin için yazıldı. Lil Peep melodisinde, gökyüzüyle birlikte. Seninle yıldızların altında sonsuzluğa yürümek istiyorum.</p>
+      <button class="special-button" onclick="showFinalMessage()">
+        <i class="fas fa-star"></i> Benimle Çıkar mısın?
+      </button>
+    </div>
+  </div>
+  
+  <!-- Zaman Sayacı -->
+  <div class="time-section">
+    <div class="time-container">
+      <h2>💫 Bizim Hikayemiz</h2>
+      <p>Tanıştığımızdan beri geçen süre:</p>
+      <div class="time-counter">
+        <div class="time-unit">
+          <div class="time-value" id="edays">--</div>
+          <div class="time-label">Gün</div>
+        </div>
+        <div class="time-unit">
+          <div class="time-value" id="ehours">--</div>
+          <div class="time-label">Saat</div>
+        </div>
+        <div class="time-unit">
+          <div class="time-value" id="eminutes">--</div>
+          <div class="time-label">Dakika</div>
+        </div>
+        <div class="time-unit">
+          <div class="time-value" id="eseconds">--</div>
+          <div class="time-label">Saniye</div>
+        </div>
+      </div>
+      <p class="subtitle" style="margin-top: 40px;">Ve sonsuza kadar sürecek...</p>
+    </div>
+  </div>
+  
+  <footer>
+    <p>Yıldızların altında, sadece senin için <span class="heart">❤</span></p>
+  </footer>
+  
+  <!-- Müzik -->
+  <audio id="music" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2023/04/28/audio_ea7b1d7f9c.mp3" type="audio/mpeg">
+  </audio>
+  
   <script>
+    // Yıldız oluşturma
+    function createStars() {
+      const starsContainer = document.getElementById('stars');
+      const starCount = 300;
+      
+      for (let i = 0; i < starCount; i++) {
+        const star = document.createElement('div');
+        star.classList.add('star');
+        
+        // Rastgele boyut ve pozisyon
+        const size = Math.random() * 3 + 1;
+        const posX = Math.random() * 100;
+        const posY = Math.random() * 100;
+        const duration = 3 + Math.random() * 7;
+        const delay = Math.random() * 10;
+        
+        star.style.width = `${size}px`;
+        star.style.height = `${size}px`;
+        star.style.left = `${posX}%`;
+        star.style.top = `${posY}%`;
+        star.style.animationDelay = `${delay}s`;
+        star.style.setProperty('--duration', `${duration}s`);
+        
+        starsContainer.appendChild(star);
+      }
+    }
+    
+    // Müzik kontrolü
+    function toggleMusic() {
+      const music = document.getElementById('music');
+      const button = document.querySelector('.music-control button');
+      
+      if (music.paused) {
+        music.play();
+        button.innerHTML = '<i class="fas fa-pause"></i> Müziği Durdur';
+        button.style.background = 'rgba(157, 78, 221, 0.4)';
+      } else {
+        music.pause();
+        button.innerHTML = '<i class="fas fa-music"></i> Müziği Başlat';
+        button.style.background = 'rgba(157, 78, 221, 0.25)';
+      }
+    }
+    
+    // Kaydırma animasyonları
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('show');
         }
       });
+    }, {
+      threshold: 0.1
     });
-
+    
     document.querySelectorAll('.hidden').forEach(el => observer.observe(el));
- 
-   function updateElapsedTime() {
-  const startDate = new Date("2025-06-28T16:23:00").getTime(); // Tanışma tarihi
-  const now = new Date().getTime();
-  const distance = now - startDate;
-
-  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-  document.getElementById("edays").innerText = days;
-  document.getElementById("ehours").innerText = hours;
-  document.getElementById("eminutes").innerText = minutes;
-  document.getElementById("eseconds").innerText = seconds;
-}
-
-setInterval(updateElapsedTime, 1000);
-updateElapsedTime();
-
-
- 
+    
+    // Zaman sayacı
+    function updateElapsedTime() {
+      const startDate = new Date("2025-06-28T16:23:00").getTime();
+      const now = new Date().getTime();
+      const distance = now - startDate;
+      
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      
+      document.getElementById("edays").innerText = days;
+      document.getElementById("ehours").innerText = hours;
+      document.getElementById("eminutes").innerText = minutes;
+      document.getElementById("eseconds").innerText = seconds;
+    }
+    
+    setInterval(updateElapsedTime, 1000);
+    updateElapsedTime();
+    
+    // Özel mesaj
+    function showFinalMessage() {
+      const messages = [
+        "💖 Evet dediğin için teşekkür ederim! Seninle yıldızların altında unutulmaz anılar biriktireceğimize inanıyorum.",
+        "🌟 Cevabın beni çok mutlu etti! Seninle her an özel...",
+        "🌌 Hayatımın en güzel yolculuğuna çıktığımız için çok heyecanlıyım!"
+      ];
+      
+      const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+      alert(randomMessage);
+      
+      // Özel bir efekt ekle
+      document.querySelector('.special-button').innerHTML = '<i class="fas fa-heart"></i> Evet! Çıkıyoruz!';
+      document.querySelector('.special-button').style.background = 'linear-gradient(to right, #ff6b6b, #ff8e8e)';
+    }
+    
+    // Sayfa yüklendiğinde yıldızları oluştur
+    window.onload = function() {
+      createStars();
+      
+      // Müzik butonuna otomatik odaklanma
+      document.querySelector('.music-control button').focus();
+    };
   </script>
 </body>
 </html>
