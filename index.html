@@ -15,7 +15,7 @@
     }
     
     body {
-      background: linear-gradient(135deg, #0b0617, #1a0a2e, #2d0a46);
+      background: linear-gradient(135deg, #050318, #0f0a30, #1a0a4a);
       color: #f5e9ff;
       min-height: 100vh;
       overflow-x: hidden;
@@ -23,17 +23,63 @@
       line-height: 1.6;
     }
     
-    /* Gece Gökyüzü ve Yıldız Efektleri */
-    .night-sky {
+    /* Nebula ve Uzay Efekti */
+    .space {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
       z-index: -2;
+      background: radial-gradient(circle at center, #050318 0%, #000000 100%);
+      overflow: hidden;
     }
     
+    .nebula {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.4;
+      z-index: -1;
+    }
+    
+    .nebula:nth-child(1) {
+      top: 20%;
+      left: 10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, #9d4edd 0%, transparent 70%);
+      animation: float 20s infinite ease-in-out;
+    }
+    
+    .nebula:nth-child(2) {
+      top: 60%;
+      left: 70%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, #ff6b6b 0%, transparent 70%);
+      animation: float 22s infinite ease-in-out;
+      animation-delay: 3s;
+    }
+    
+    .nebula:nth-child(3) {
+      top: 40%;
+      left: 40%;
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, #4e9edd 0%, transparent 70%);
+      animation: float 25s infinite ease-in-out;
+      animation-delay: 6s;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      25% { transform: translate(-30px, 20px) rotate(5deg); }
+      50% { transform: translate(20px, -30px) rotate(-5deg); }
+      75% { transform: translate(25px, 15px) rotate(3deg); }
+    }
+    
+    /* Yıldız Efektleri */
     .stars {
       position: fixed;
       top: 0;
@@ -53,37 +99,39 @@
     }
     
     @keyframes twinkle {
-      0%, 100% { opacity: 0.2; }
+      0%, 100% { opacity: 0.3; }
       50% { opacity: 1; }
     }
     
     /* Müzik Kontrolü */
     .music-control {
       position: fixed;
-      top: 20px;
-      right: 20px;
+      top: 25px;
+      right: 25px;
       z-index: 100;
     }
     
-    .music-control button {
-      background: rgba(157, 78, 221, 0.25);
+    .music-button {
+      background: rgba(157, 78, 221, 0.3);
       border: 1px solid #9d4edd;
       color: #e0aaff;
-      padding: 10px 15px;
-      border-radius: 30px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
       cursor: pointer;
-      font-size: 16px;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(5px);
-      box-shadow: 0 0 15px rgba(157, 78, 221, 0.4);
       display: flex;
+      justify-content: center;
       align-items: center;
-      gap: 8px;
+      transition: all 0.4s ease;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 0 20px rgba(157, 78, 221, 0.5);
+      font-size: 1.4rem;
     }
     
-    .music-control button:hover {
-      background: rgba(157, 78, 221, 0.4);
-      transform: scale(1.05);
+    .music-button:hover {
+      transform: scale(1.1) rotate(15deg);
+      background: rgba(157, 78, 221, 0.5);
+      box-shadow: 0 0 30px rgba(157, 78, 221, 0.8);
     }
     
     /* Hero Bölümü */
@@ -99,41 +147,43 @@
       overflow: hidden;
     }
     
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle at center, rgba(157, 78, 221, 0.1) 0%, transparent 70%);
-      z-index: -1;
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      max-width: 95%;
     }
     
     .hero h1 {
-      font-size: 4.5rem;
+      font-size: 5rem;
       margin-bottom: 20px;
       background: linear-gradient(to right, #e0aaff, #c77dff, #9d4edd);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 30px rgba(157, 78, 221, 0.7);
-      letter-spacing: 3px;
+      text-shadow: 0 0 40px rgba(157, 78, 221, 0.8);
+      letter-spacing: 4px;
       font-weight: 700;
     }
     
     .hero p {
-      font-size: 1.5rem;
-      max-width: 600px;
+      font-size: 1.7rem;
+      max-width: 700px;
       opacity: 0.9;
       margin-top: 10px;
       color: #d8b4fe;
+      text-shadow: 0 0 10px rgba(216, 180, 254, 0.7);
     }
     
     .subtitle {
-      font-size: 1.2rem;
-      margin-top: 10px;
+      font-size: 1.4rem;
+      margin-top: 20px;
       color: #c77dff;
-      max-width: 500px;
+      max-width: 600px;
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 0.8; }
+      50% { opacity: 1; }
     }
     
     /* Mesaj Bölümleri */
@@ -143,11 +193,11 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 80px 20px;
+      padding: 100px 20px;
       text-align: center;
       opacity: 0;
       transform: translateY(50px);
-      transition: all 1s ease;
+      transition: all 1.2s ease;
       position: relative;
       margin: 50px 0;
     }
@@ -158,15 +208,15 @@
     }
     
     .message-card {
-      background: rgba(30, 15, 60, 0.4);
+      background: rgba(20, 10, 40, 0.25);
       border: 1px solid rgba(170, 110, 255, 0.2);
-      border-radius: 20px;
-      padding: 50px 40px;
-      max-width: 800px;
+      border-radius: 25px;
+      padding: 70px 50px;
+      max-width: 850px;
       width: 90%;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 
-                  0 0 30px rgba(157, 78, 221, 0.2) inset;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 
+                  0 0 30px rgba(157, 78, 221, 0.15) inset;
       position: relative;
       overflow: hidden;
     }
@@ -174,147 +224,267 @@
     .message-card::before {
       content: '';
       position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(199, 125, 255, 0.1) 0%, transparent 70%);
-      z-index: -1;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(to right, #9d4edd, #ff6b6b, #4e9edd);
+      opacity: 0.7;
     }
     
     .message-section h2 {
-      font-size: 2.8rem;
-      margin-bottom: 30px;
+      font-size: 3.2rem;
+      margin-bottom: 40px;
       color: #e0aaff;
-      text-shadow: 0 0 15px rgba(224, 170, 255, 0.8);
-      font-weight: 600;
+      text-shadow: 0 0 20px rgba(224, 170, 255, 0.9);
+      font-weight: 700;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .message-section h2::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: linear-gradient(to right, #9d4edd, #ff6b6b);
+      border-radius: 3px;
+      opacity: 0.7;
     }
     
     .message-section p {
-      font-size: 1.3rem;
-      max-width: 700px;
-      line-height: 1.8;
+      font-size: 1.4rem;
+      max-width: 750px;
+      line-height: 1.9;
       color: #e9d5ff;
+      margin-bottom: 30px;
     }
     
     .quote {
       font-style: italic;
-      margin: 25px 0;
-      padding: 15px 30px;
-      border-left: 3px solid #c77dff;
+      margin: 35px 0;
+      padding: 20px 40px;
+      border-left: 4px solid #c77dff;
       background: rgba(157, 78, 221, 0.1);
-      border-radius: 0 10px 10px 0;
+      border-radius: 0 15px 15px 0;
+      font-size: 1.3rem;
+      color: #d8b4fe;
+      text-align: left;
     }
     
     /* Zaman Sayacı */
     .time-section {
-      background: rgba(15, 8, 35, 0.6);
-      border-top: 1px solid rgba(199, 125, 255, 0.3);
-      border-bottom: 1px solid rgba(199, 125, 255, 0.3);
-      padding: 80px 20px;
+      background: rgba(10, 5, 25, 0.5);
+      border-top: 1px solid rgba(199, 125, 255, 0.2);
+      border-bottom: 1px solid rgba(199, 125, 255, 0.2);
+      padding: 100px 20px;
       text-align: center;
+      position: relative;
     }
     
     .time-container {
-      max-width: 1000px;
+      max-width: 1100px;
       margin: 0 auto;
+      position: relative;
+      z-index: 5;
     }
     
     .time-section h2 {
-      font-size: 2.5rem;
-      margin-bottom: 50px;
+      font-size: 3rem;
+      margin-bottom: 60px;
       color: #d8b4fe;
-      text-shadow: 0 0 10px rgba(216, 180, 254, 0.6);
+      text-shadow: 0 0 15px rgba(216, 180, 254, 0.7);
+    }
+    
+    .time-counters-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+    
+    .time-counter-group {
+      background: rgba(35, 15, 70, 0.25);
+      border: 1px solid rgba(170, 110, 255, 0.2);
+      border-radius: 20px;
+      padding: 30px;
+      min-width: 320px;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      transition: all 0.5s ease;
+    }
+    
+    .time-counter-group:hover {
+      transform: translateY(-10px);
+      background: rgba(157, 78, 221, 0.2);
+      box-shadow: 0 15px 35px rgba(157, 78, 221, 0.3);
+    }
+    
+    .time-counter-group h3 {
+      font-size: 1.8rem;
+      margin-bottom: 25px;
+      color: #c77dff;
+      text-shadow: 0 0 10px rgba(199, 125, 255, 0.7);
     }
     
     .time-counter {
       display: flex;
       justify-content: center;
-      gap: 25px;
-      margin-top: 30px;
+      gap: 20px;
       flex-wrap: wrap;
     }
     
     .time-unit {
-      background: rgba(45, 20, 80, 0.3);
-      border: 1px solid rgba(170, 110, 255, 0.3);
-      padding: 20px 15px;
+      background: rgba(20, 10, 40, 0.4);
+      border: 1px solid rgba(170, 110, 255, 0.2);
+      padding: 18px 15px;
       border-radius: 15px;
-      min-width: 120px;
-      backdrop-filter: blur(5px);
-      transition: transform 0.3s ease;
-    }
-    
-    .time-unit:hover {
-      transform: translateY(-10px);
-      background: rgba(157, 78, 221, 0.2);
+      min-width: 80px;
+      backdrop-filter: blur(4px);
     }
     
     .time-value {
-      font-size: 3rem;
+      font-size: 2.5rem;
       font-weight: bold;
-      color: #c77dff;
-      text-shadow: 0 0 15px rgba(199, 125, 255, 0.8);
+      color: #e0aaff;
+      text-shadow: 0 0 15px rgba(224, 170, 255, 0.8);
     }
     
     .time-label {
       font-size: 1rem;
-      opacity: 0.8;
+      opacity: 0.9;
       margin-top: 10px;
-      color: #e0aaff;
+      color: #d8b4fe;
     }
     
-    /* Özel Buton */
+    /* Butonlar */
+    .buttons-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      margin-top: 40px;
+    }
+    
     .special-button {
-      margin-top: 50px;
-      background: linear-gradient(to right, #9d4edd, #7b2cbf);
+      background: linear-gradient(to right, #9d4edd, #ff6b6b);
       border: none;
       color: white;
-      padding: 18px 50px;
-      font-size: 1.3rem;
-      border-radius: 50px;
+      padding: 22px 60px;
+      font-size: 1.5rem;
+      border-radius: 60px;
       cursor: pointer;
-      transition: all 0.4s ease;
+      transition: all 0.5s ease;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 5px 20px rgba(157, 78, 221, 0.5);
-      letter-spacing: 1px;
-      font-weight: 600;
+      box-shadow: 0 8px 30px rgba(157, 78, 221, 0.4);
+      letter-spacing: 1.5px;
+      font-weight: 700;
       display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 15px;
+      z-index: 10;
     }
     
     .special-button:hover {
       transform: translateY(-5px) scale(1.05);
-      box-shadow: 0 10px 30px rgba(157, 78, 221, 0.7);
-      background: linear-gradient(to right, #8a42c7, #6a25a9);
+      box-shadow: 0 12px 35px rgba(157, 78, 221, 0.6);
     }
     
-    .special-button::after {
+    .special-button::before {
       content: '';
       position: absolute;
-      top: -50%;
-      left: -100%;
-      width: 50px;
-      height: 200%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-      transform: rotate(25deg);
-      transition: all 0.6s;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, #ff6b6b, #9d4edd, #4e9edd, #ff6b6b);
+      background-size: 400%;
+      z-index: -1;
+      filter: blur(5px);
+      animation: glowing 20s linear infinite;
+      opacity: 0;
+      transition: opacity 0.5s ease;
     }
     
-    .special-button:hover::after {
-      left: 120%;
+    .special-button:hover::before {
+      opacity: 1;
+    }
+    
+    .reset-button {
+      background: rgba(45, 20, 80, 0.3);
+      border: 1px solid rgba(170, 110, 255, 0.3);
+      color: #e0aaff;
+      padding: 12px 25px;
+      font-size: 1rem;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(4px);
+      box-shadow: 0 0 15px rgba(157, 78, 221, 0.3);
+    }
+    
+    .reset-button:hover {
+      background: rgba(157, 78, 221, 0.2);
+      transform: translateY(-3px);
+      box-shadow: 0 0 20px rgba(157, 78, 221, 0.5);
+    }
+    
+    @keyframes glowing {
+      0% { background-position: 0 0; }
+      50% { background-position: 400% 0; }
+      100% { background-position: 0 0; }
+    }
+    
+    /* Log Bölümü */
+    .log-container {
+      background: rgba(20, 10, 40, 0.3);
+      border: 1px solid rgba(170, 110, 255, 0.2);
+      border-radius: 15px;
+      padding: 20px;
+      margin: 40px auto 0;
+      max-width: 600px;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    .log-container h3 {
+      font-size: 1.5rem;
+      color: #c77dff;
+      margin-bottom: 15px;
+      text-align: center;
+      text-shadow: 0 0 10px rgba(199, 125, 255, 0.5);
+    }
+    
+    .log-entry {
+      background: rgba(30, 15, 60, 0.3);
+      border-left: 3px solid #9d4edd;
+      padding: 12px 15px;
+      margin: 10px 0;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.95rem;
+      color: #e0aaff;
+      text-align: left;
+    }
+    
+    .log-date {
+      font-weight: bold;
+      color: #ff6b6b;
+      display: block;
+      margin-bottom: 5px;
     }
     
     /* Footer */
     footer {
       text-align: center;
-      padding: 40px 20px;
-      font-size: 1rem;
-      opacity: 0.7;
+      padding: 50px 20px;
+      font-size: 1.1rem;
+      opacity: 0.8;
       color: #c77dff;
-      background: rgba(15, 8, 35, 0.5);
+      background: rgba(8, 4, 20, 0.4);
       border-top: 1px solid rgba(170, 110, 255, 0.2);
     }
     
@@ -330,55 +500,59 @@
     }
     
     /* Responsive Tasarım */
-    @media (max-width: 900px) {
+    @media (max-width: 1000px) {
       .hero h1 {
-        font-size: 3.5rem;
+        font-size: 4rem;
+      }
+      
+      .message-section h2 {
+        font-size: 2.6rem;
+      }
+      
+      .message-section p {
+        font-size: 1.2rem;
+      }
+      
+      .time-unit {
+        min-width: 70px;
+      }
+      
+      .log-container {
+        max-width: 95%;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 3.2rem;
+      }
+      
+      .hero p {
+        font-size: 1.4rem;
+      }
+      
+      .subtitle {
+        font-size: 1.2rem;
+      }
+      
+      .message-section {
+        padding: 80px 20px;
+      }
+      
+      .message-card {
+        padding: 50px 30px;
       }
       
       .message-section h2 {
         font-size: 2.3rem;
       }
       
-      .message-section p {
-        font-size: 1.1rem;
-      }
-      
-      .time-unit {
-        min-width: 100px;
-      }
-      
-      .time-value {
-        font-size: 2.5rem;
-      }
-    }
-    
-    @media (max-width: 600px) {
-      .hero h1 {
-        font-size: 2.5rem;
-      }
-      
-      .hero p {
-        font-size: 1.2rem;
-      }
-      
-      .message-section {
-        padding: 60px 20px;
-      }
-      
-      .message-card {
-        padding: 30px 20px;
-      }
-      
-      .message-section h2 {
-        font-size: 1.8rem;
-      }
-      
       .time-section h2 {
-        font-size: 2rem;
+        font-size: 2.5rem;
       }
       
       .time-unit {
-        min-width: 80px;
+        min-width: 65px;
         padding: 15px 10px;
       }
       
@@ -387,14 +561,24 @@
       }
       
       .special-button {
-        padding: 15px 35px;
+        padding: 18px 45px;
+        font-size: 1.3rem;
+      }
+      
+      .quote {
+        padding: 15px 25px;
         font-size: 1.1rem;
       }
     }
     
-    @media (max-width: 400px) {
+    @media (max-width: 480px) {
       .hero h1 {
-        font-size: 2rem;
+        font-size: 2.5rem;
+        letter-spacing: 2px;
+      }
+      
+      .hero p {
+        font-size: 1.2rem;
       }
       
       .time-counter {
@@ -402,42 +586,123 @@
       }
       
       .time-unit {
-        min-width: 70px;
+        min-width: 60px;
         padding: 12px 8px;
       }
       
       .time-value {
         font-size: 1.8rem;
       }
+      
+      .special-button {
+        padding: 15px 35px;
+        font-size: 1.1rem;
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .time-counter-group {
+        min-width: 100%;
+        padding: 20px;
+      }
+      
+      .log-container {
+        padding: 15px;
+        margin-top: 20px;
+      }
+      
+      .message-card {
+        padding: 35px 20px;
+      }
+      
+      .message-section h2 {
+        font-size: 2rem;
+        margin-bottom: 30px;
+      }
+      
+      .message-section p {
+        font-size: 1.1rem;
+        margin-bottom: 20px;
+      }
+      
+      .buttons-container {
+        margin-top: 30px;
+      }
+      
+      .time-section {
+        padding: 60px 20px;
+      }
+    }
+    
+    @media (max-width: 360px) {
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+      
+      .hero p {
+        font-size: 1.1rem;
+      }
+      
+      .subtitle {
+        font-size: 1rem;
+      }
+      
+      .message-section h2 {
+        font-size: 1.8rem;
+      }
+      
+      .time-unit {
+        min-width: 55px;
+        padding: 10px 6px;
+      }
+      
+      .time-value {
+        font-size: 1.6rem;
+      }
+      
+      .special-button {
+        font-size: 1rem;
+        padding: 12px 25px;
+      }
+      
+      .reset-button {
+        padding: 10px 20px;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Gece Gökyüzü -->
-  <div class="night-sky"></div>
+  <!-- Uzay ve Nebula Efektleri -->
+  <div class="space">
+    <div class="nebula"></div>
+    <div class="nebula"></div>
+    <div class="nebula"></div>
+  </div>
   
   <!-- Yıldız Efektleri -->
   <div class="stars" id="stars"></div>
   
   <!-- Müzik Kontrolü -->
   <div class="music-control">
-    <button onclick="toggleMusic()">
-      <i class="fas fa-music"></i> Müziği Başlat
-    </button>
+    <div class="music-button" onclick="toggleMusic()">
+      <i class="fas fa-music"></i>
+    </div>
   </div>
   
   <!-- Hero Bölümü -->
   <div class="hero">
-    <h1>✧ star shopping ✧</h1>
-    <p>for someone special in the universe...</p>
-    <div class="subtitle">"I'll be back in the morning, I know that I'm not that important to you..."</div>
+    <div class="hero-content">
+      <h1>✧ star shopping ✧</h1>
+      <p>for my shining star in the universe...</p>
+      <div class="subtitle">"I'll be back in the morning, I know that I'm not that important to you..."</div>
+    </div>
   </div>
   
   <!-- Mesaj Bölümleri -->
   <div class="message-section hidden">
     <div class="message-card">
       <h2>“Wait right here...”</h2>
-      <p>Birlikte olduğumuz o ilk an hâlâ aklımda. Seni ilk gördüğümde zaman durdu ve yıldızlar parlamaya başladı.</p>
+      <p>Bana güldüğün o ilk an hâlâ aklımda. Seni ilk gördüğüm zamandayım hala seni izliyorum. Gözlerindeki o ışık, benim için tüm yldızlardan güzeldi.</p>
       <div class="quote">"I just wanna be with you, be with you"</div>
     </div>
   </div>
@@ -445,7 +710,7 @@
   <div class="message-section hidden">
     <div class="message-card">
       <h2>“I'll be back in the mornin’”</h2>
-      <p>Her sabah gözlerini görmek için geri döneceğim. Seninle geçirdiğim her an, hayatımın en değerli hazinesi.</p>
+      <p>Her sabah gözlerini görmek için uyanıyorum. Seninle geçirdiğim hiçbir anı aklımdan silemiyorum. Uyandığımdan yatana kadar aklımdan çıkmıyorsun. Çıkmasını da istemiyorum...</p>
       <div class="quote">"Look at the sky tonight, all of the stars have a reason"</div>
     </div>
   </div>
@@ -453,7 +718,7 @@
   <div class="message-section hidden">
     <div class="message-card">
       <h2>“I know that I'm not that important to you...”</h2>
-      <p>Ama sen benim için bir evrenden fazlasısın. Kalbimdeki her yıldız senin adını fısıldıyor.</p>
+      <p>Sen benim çoçukken en seviğim dinazorum, kimseyle paylaşmak istemediğim oyuncağım, keçeli kalem setimdin... Sen benim için her şeysin, her şeyimsin.</p>
       <div class="quote">"You're the reason I'm alive, you're the reason I'm breathing"</div>
     </div>
   </div>
@@ -461,62 +726,83 @@
   <div class="message-section hidden">
     <div class="message-card">
       <h2>“But I'm still here...”</h2>
-      <p>Yıldızlar kadar uzak olsan bile, kalbime yakınsın. Senin için buradayım ve hep burada olacağım.</p>
+      <p>Geceleri yıldızlar kadar uzak olsanda, kalbime yakınsın. Dünyanın neresinde olursam olayım senin için buradayım ve hep burada olacağım.</p>
       <div class="quote">"I'll be right here waiting for you, my love"</div>
     </div>
   </div>
   
   <div class="message-section hidden">
     <div class="message-card">
-      <h2>🌠 Seni Seviyorum...</h2>
-      <p>Bu site sadece senin için yazıldı. Lil Peep melodisinde, gökyüzüyle birlikte. Seninle yıldızların altında sonsuzluğa yürümek istiyorum.</p>
-      <button class="special-button" onclick="showFinalMessage()">
-        <i class="fas fa-star"></i> Benimle Çıkar mısın?
-      </button>
+      <h2>🌠 Seni Seviyorum</h2>
+      <p>Sen bitanem, güzelim, balım, tatlışım, bebeğim, aşkım, güzel gözlüm, hayatımın anlamı, herşeyim, Ela'm sevgilimde olur musun?</p>
+      <div class="buttons-container">
+        <button class="special-button" id="togetherButton">
+          <i class="fas fa-star"></i> Benimle Çıkar mısın?
+        </button>
+        <button class="reset-button" id="resetButton">
+          <i class="fas fa-redo"></i> Sıfırla
+        </button>
+      </div>
     </div>
   </div>
   
-  <!-- Zaman Sayacı -->
+  <!-- Zaman Sayacı ve Log -->
   <div class="time-section">
     <div class="time-container">
-      <h2>💫 Bizim Hikayemiz</h2>
-      <p>Tanıştığımızdan beri geçen süre:</p>
-      <div class="time-counter">
-        <div class="time-unit">
-          <div class="time-value" id="edays">--</div>
-          <div class="time-label">Gün</div>
-        </div>
-        <div class="time-unit">
-          <div class="time-value" id="ehours">--</div>
-          <div class="time-label">Saat</div>
-        </div>
-        <div class="time-unit">
-          <div class="time-value" id="eminutes">--</div>
-          <div class="time-label">Dakika</div>
-        </div>
-        <div class="time-unit">
-          <div class="time-value" id="eseconds">--</div>
-          <div class="time-label">Saniye</div>
+      <h2>💫 Bizim Zamanımız</h2>
+      
+      <div class="time-counters-container">
+        <!-- Birlikte Olma Sayacı (Başlangıçta gizli) -->
+        <div class="time-counter-group" id="togetherCounter" style="display: none;">
+          <h3>Birlikte Olduğumuz Süre</h3>
+          <div class="time-counter">
+            <div class="time-unit">
+              <div class="time-value" id="tdays">--</div>
+              <div class="time-label">Gün</div>
+            </div>
+            <div class="time-unit">
+              <div class="time-value" id="thours">--</div>
+              <div class="time-label">Saat</div>
+            </div>
+            <div class="time-unit">
+              <div class="time-value" id="tminutes">--</div>
+              <div class="time-label">Dakika</div>
+            </div>
+            <div class="time-unit">
+              <div class="time-value" id="tseconds">--</div>
+              <div class="time-label">Saniye</div>
+            </div>
+          </div>
         </div>
       </div>
-      <p class="subtitle" style="margin-top: 40px;">Ve sonsuza kadar sürecek...</p>
+      
+      <!-- Log Kayıtları -->
+      <div class="log-container" id="logContainer">
+        <h3><i class="fas fa-history"></i> Başlangıç Kayıtları</h3>
+        <div id="logEntries">
+          <!-- Log kayıtları buraya eklenecek -->
+        </div>
+      </div>
+      
+      <p class="subtitle" style="margin-top: 50px; font-size: 1.6rem;">Ve sonsuza kadar sürecek...</p>
     </div>
   </div>
   
   <footer>
-    <p>Yıldızların altında, sadece senin için <span class="heart">❤</span></p>
+    <p>Yıldızların altında, sadece senin için <span class="heart">❤</span> | Sen benim yıldız sistemimsin...</p>
   </footer>
   
   <!-- Müzik -->
   <audio id="music" loop>
-    <source src="https://cdn.pixabay.com/download/audio/2023/04/28/audio_ea7b1d7f9c.mp3" type="audio/mpeg">
+    <source src="muzik.mp3" type="audio/mpeg">
+    Tarayıcınız audio elementini desteklemiyor.
   </audio>
   
   <script>
     // Yıldız oluşturma
     function createStars() {
       const starsContainer = document.getElementById('stars');
-      const starCount = 300;
+      const starCount = 500;
       
       for (let i = 0; i < starCount; i++) {
         const star = document.createElement('div');
@@ -526,8 +812,8 @@
         const size = Math.random() * 3 + 1;
         const posX = Math.random() * 100;
         const posY = Math.random() * 100;
-        const duration = 3 + Math.random() * 7;
-        const delay = Math.random() * 10;
+        const duration = 4 + Math.random() * 8;
+        const delay = Math.random() * 12;
         
         star.style.width = `${size}px`;
         star.style.height = `${size}px`;
@@ -543,16 +829,22 @@
     // Müzik kontrolü
     function toggleMusic() {
       const music = document.getElementById('music');
-      const button = document.querySelector('.music-control button');
+      const button = document.querySelector('.music-button');
       
       if (music.paused) {
-        music.play();
-        button.innerHTML = '<i class="fas fa-pause"></i> Müziği Durdur';
-        button.style.background = 'rgba(157, 78, 221, 0.4)';
+        music.play()
+          .then(() => {
+            button.innerHTML = '<i class="fas fa-pause"></i>';
+            button.style.background = 'rgba(157, 78, 221, 0.5)';
+          })
+          .catch(e => {
+            console.error("Müzik çalınamadı:", e);
+            alert("Müzik çalarken bir hata oluştu! Lütfen daha sonra tekrar deneyin.");
+          });
       } else {
         music.pause();
-        button.innerHTML = '<i class="fas fa-music"></i> Müziği Başlat';
-        button.style.background = 'rgba(157, 78, 221, 0.25)';
+        button.innerHTML = '<i class="fas fa-music"></i>';
+        button.style.background = 'rgba(157, 78, 221, 0.3)';
       }
     }
     
@@ -569,48 +861,205 @@
     
     document.querySelectorAll('.hidden').forEach(el => observer.observe(el));
     
-    // Zaman sayacı
+    // Birlikte olma tarihi (başlangıçta null)
+    let togetherDate = localStorage.getItem('togetherDate') ? 
+        new Date(parseInt(localStorage.getItem('togetherDate'))) : null;
+    
+    // Log kayıtları
+    let logEntries = JSON.parse(localStorage.getItem('logEntries')) || [];
+    
+    // Eğer daha önce kaydedilmiş bir tarih varsa göster
+    if (togetherDate) {
+      document.getElementById('togetherCounter').style.display = 'block';
+      updateButtonState();
+      updateLogDisplay();
+    }
+    
+    // Buton durumunu güncelle
+    function updateButtonState() {
+      const togetherButton = document.getElementById('togetherButton');
+      if (togetherDate) {
+        togetherButton.innerHTML = '<i class="fas fa-heart"></i> Teşekkürler sevgilim';
+        togetherButton.style.background = 'linear-gradient(to right, #ff6b6b, #ff8e8e)';
+        togetherButton.disabled = true;
+      } else {
+        togetherButton.innerHTML = '<i class="fas fa-star"></i> Benimle Çıkar mısın?';
+        togetherButton.style.background = 'linear-gradient(to right, #9d4edd, #ff6b6b)';
+        togetherButton.disabled = false;
+      }
+    }
+    
+    // Log kayıtlarını güncelle
+    function updateLogDisplay() {
+      const logContainer = document.getElementById('logEntries');
+      logContainer.innerHTML = '';
+      
+      if (logEntries.length === 0) {
+        logContainer.innerHTML = '<div class="log-entry">Henüz kayıt bulunmamaktadır</div>';
+        return;
+      }
+      
+      // En yeni kayıt en üstte olacak şekilde sırala
+      const sortedLogs = [...logEntries].reverse();
+      
+      sortedLogs.forEach(entry => {
+        const logEntry = document.createElement('div');
+        logEntry.className = 'log-entry';
+        logEntry.innerHTML = `
+          <span class="log-date">${formatDateTime(new Date(entry.timestamp))}</span>
+          ${entry.action}
+        `;
+        logContainer.appendChild(logEntry);
+      });
+    }
+    
+    // Tarih formatlama
+    function formatDateTime(date) {
+      const day = date.getDate().toString().padStart(2, '0');
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      const year = date.getFullYear();
+      const hours = date.getHours().toString().padStart(2, '0');
+      const minutes = date.getMinutes().toString().padStart(2, '0');
+      
+      return `${day}.${month}.${year} ${hours}:${minutes}`;
+    }
+    
+    // Zaman sayacı güncelleme
     function updateElapsedTime() {
-      const startDate = new Date("2025-06-28T16:23:00").getTime();
       const now = new Date().getTime();
-      const distance = now - startDate;
       
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-      
-      document.getElementById("edays").innerText = days;
-      document.getElementById("ehours").innerText = hours;
-      document.getElementById("eminutes").innerText = minutes;
-      document.getElementById("eseconds").innerText = seconds;
+      // Birlikte olma sayacı
+      if (togetherDate) {
+        const togetherDistance = now - togetherDate.getTime();
+        const togetherDays = Math.floor(togetherDistance / (1000 * 60 * 60 * 24));
+        const togetherHours = Math.floor((togetherDistance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const togetherMinutes = Math.floor((togetherDistance % (1000 * 60 * 60)) / (1000 * 60));
+        const togetherSeconds = Math.floor((togetherDistance % (1000 * 60)) / 1000);
+        
+        document.getElementById("tdays").innerText = togetherDays;
+        document.getElementById("thours").innerText = togetherHours;
+        document.getElementById("tminutes").innerText = togetherMinutes;
+        document.getElementById("tseconds").innerText = togetherSeconds;
+      }
     }
     
     setInterval(updateElapsedTime, 1000);
     updateElapsedTime();
     
-    // Özel mesaj
-    function showFinalMessage() {
-      const messages = [
-        "💖 Evet dediğin için teşekkür ederim! Seninle yıldızların altında unutulmaz anılar biriktireceğimize inanıyorum.",
-        "🌟 Cevabın beni çok mutlu etti! Seninle her an özel...",
-        "🌌 Hayatımın en güzel yolculuğuna çıktığımız için çok heyecanlıyım!"
-      ];
+    // Konfeti efekti
+    function createConfetti() {
+      const colors = ['#ff6b6b', '#4e9edd', '#9d4edd', '#e0aaff', '#c77dff'];
+      const container = document.querySelector('.message-section:last-child .message-card');
       
-      const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-      alert(randomMessage);
+      for (let i = 0; i < 150; i++) {
+        const confetti = document.createElement('div');
+        confetti.style.position = 'absolute';
+        confetti.style.width = '10px';
+        confetti.style.height = '10px';
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.borderRadius = '50%';
+        confetti.style.left = `${Math.random() * 100}%`;
+        confetti.style.top = `${Math.random() * 100}%`;
+        confetti.style.opacity = '0';
+        confetti.style.zIndex = '100';
+        confetti.style.animation = `confetti-fall ${1 + Math.random() * 3}s ease-in forwards`;
+        
+        container.appendChild(confetti);
+        
+        // Animasyon bitince kaldır
+        setTimeout(() => {
+          confetti.remove();
+        }, 4000);
+      }
       
-      // Özel bir efekt ekle
-      document.querySelector('.special-button').innerHTML = '<i class="fas fa-heart"></i> Evet! Çıkıyoruz!';
-      document.querySelector('.special-button').style.background = 'linear-gradient(to right, #ff6b6b, #ff8e8e)';
+      // CSS animasyonu ekle (sadece bir kez)
+      if (!document.getElementById('confetti-style')) {
+        const style = document.createElement('style');
+        style.id = 'confetti-style';
+        style.textContent = `
+          @keyframes confetti-fall {
+            0% {
+              opacity: 1;
+              transform: translateY(-100px) rotate(0deg);
+            }
+            100% {
+              opacity: 0;
+              transform: translateY(500px) rotate(720deg);
+            }
+          }
+        `;
+        document.head.appendChild(style);
+      }
     }
     
-    // Sayfa yüklendiğinde yıldızları oluştur
+    // Sayfa yüklendiğinde
     window.onload = function() {
       createStars();
+      updateLogDisplay();
+      updateButtonState();
       
-      // Müzik butonuna otomatik odaklanma
-      document.querySelector('.music-control button').focus();
+      // Birlikte olma butonu
+      const togetherButton = document.getElementById('togetherButton');
+      togetherButton.addEventListener('click', function() {
+        // Sadece ilk tıklamada çalışır
+        if (!togetherDate) {
+          togetherDate = new Date();
+          localStorage.setItem('togetherDate', togetherDate.getTime());
+          
+          // Log kaydı ekle
+          const logEntry = {
+            timestamp: togetherDate.getTime(),
+            action: "Başlangıç tarihi ayarlandı"
+          };
+          logEntries.push(logEntry);
+          localStorage.setItem('logEntries', JSON.stringify(logEntries));
+          
+          // Birlikte olma sayacını göster
+          document.getElementById('togetherCounter').style.display = 'block';
+          
+          // Butonu güncelle
+          updateButtonState();
+          
+          // Log kayıtlarını güncelle
+          updateLogDisplay();
+          
+          // Konfeti efekti
+          createConfetti();
+          
+          // Mesajı göster
+          setTimeout(() => {
+            alert("💖 Teşekkürler sevgilim. 🌟");
+          }, 500);
+        }
+      });
+      
+      // Sıfırlama butonu
+      const resetButton = document.getElementById('resetButton');
+      resetButton.addEventListener('click', function() {
+        if (confirm("Birlikte olma süresini sıfırlamak istediğinize emin misiniz? Bu işlem geri alınamaz!")) {
+          localStorage.removeItem('togetherDate');
+          togetherDate = null;
+          
+          // Log kaydı ekle
+          const logEntry = {
+            timestamp: new Date().getTime(),
+            action: "Sayaç sıfırlandı"
+          };
+          logEntries.push(logEntry);
+          localStorage.setItem('logEntries', JSON.stringify(logEntries));
+          
+          // Birlikte olma sayacını gizle
+          document.getElementById('togetherCounter').style.display = 'none';
+          
+          // Butonu eski haline getir
+          updateButtonState();
+          
+          // Log kayıtlarını güncelle
+          updateLogDisplay();
+          
+          alert("⏱️ Birlikte olma süresi sıfırlandı! Artık yeni bir başlangıç yapabilirsiniz.");
+        }
+      });
     };
   </script>
 </body>
